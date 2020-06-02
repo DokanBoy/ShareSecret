@@ -60,11 +60,18 @@
             <version>1.4.0</version>
         </dependency>
 
-        <!-- HicariCP -->
+        <!-- Hibernate Core -->
         <dependency>
-            <groupId>com.zaxxer</groupId>
-            <artifactId>HikariCP</artifactId>
-            <version>3.4.5</version>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.4.17.Final</version>
+        </dependency>
+
+        <!-- Hibernate Commons Annotations -->
+        <dependency>
+            <groupId>org.hibernate.common</groupId>
+            <artifactId>hibernate-commons-annotations</artifactId>
+            <version>5.1.0.Final</version>
         </dependency>
 
         <!-- JetBrains Annotations -->

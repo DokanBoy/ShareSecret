@@ -12,7 +12,7 @@ import pw.zakharow.vkbot.command.CommandManager;
  * @author Alexey Zakharov
  * @date 31.05.2020
  */
-public class VkBot {
+public final class VkBot {
 
     private static final Logger log = LoggerFactory.getLogger(VkBot.class);
 

@@ -1,4 +1,4 @@
-package pw.zakharow.vkbot.model;
+package pw.zakharow.vkbot.credentials;
 
 /**
  * @author Alexey Zakharov

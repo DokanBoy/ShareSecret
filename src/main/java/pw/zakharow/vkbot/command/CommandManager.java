@@ -13,7 +13,7 @@ import java.util.List;
  * @author Alexey Zakharov
  * @date 26.04.2020
  */
-public class CommandManager {
+public final class CommandManager {
 
     private static final Logger log = LoggerFactory.getLogger(CommandManager.class);
 
@@ -32,9 +32,10 @@ public class CommandManager {
         client.onMessage(event -> {
             COMMAND_REGISTRY.forEach(command -> {
                 IncomingMessage message = event.getMessage();
+                String target = getArgs(message.getText())[0];
 
-                if (command.getAliases().contains(getArgs(message.getText())[0])) {
-                    command.call(event.getMessage(), getArgs(event.getMessage().getText()));
+                if (command.getName().equals(target) || command.getAliases().contains(target)) {
+                    command.call(message, getArgs(message.getText()));
                 }
             });
         });
@@ -42,7 +43,7 @@ public class CommandManager {
 
     private String[] getArgs(String sourceText) {
         String[] source = sourceText.split(" ");
-        String[] args = new String[source.length - 2];
+        String[] args = new String[source.length - 1];
 
         for (int i = 2; i < source.length - 3; i++) {
             args[i - 2] = source[i];

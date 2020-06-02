@@ -3,10 +3,14 @@ package pw.zakharow.vkbot.command;
 import com.google.common.collect.ImmutableList;
 import com.petersamokhin.vksdk.core.client.VkApiClient;
 import com.petersamokhin.vksdk.core.model.event.IncomingMessage;
+import com.petersamokhin.vksdk.core.model.objects.Keyboard;
+import org.jetbrains.annotations.NotNull;
 import pw.zakharow.vkbot.Launch;
 import pw.zakharow.vkbot.VkBot;
 import pw.zakharow.vkbot.command.context.CommandContext;
 import pw.zakharow.vkbot.command.context.VkCommandContext;
+
+import java.util.function.Consumer;
 
 /**
  * @author Alexey Zakharov
@@ -31,7 +35,7 @@ public abstract class AbstractCommand implements Command {
      *                 0 - Пользователь,
      *                 1 - Админ
      */
-    public AbstractCommand(String name, int needArgs, int level, boolean reply, String... aliases) {
+    protected AbstractCommand(@NotNull String name, int needArgs, int level, boolean reply, String... aliases) {
         this.name = name;
         this.aliases = aliases;
         this.needArgs = needArgs;
@@ -39,7 +43,7 @@ public abstract class AbstractCommand implements Command {
         this.reply = reply;
     }
 
-    public AbstractCommand(String name, int level, String... aliases) {
+    protected AbstractCommand(@NotNull String name, int level, String... aliases) {
         this.name = name;
         this.aliases = aliases;
         this.needArgs = 0;
@@ -47,7 +51,7 @@ public abstract class AbstractCommand implements Command {
         this.reply = false;
     }
 
-    public AbstractCommand(String name, boolean reply, String... aliases) {
+    protected AbstractCommand(@NotNull String name, boolean reply, String... aliases) {
         this.name = name;
         this.aliases = aliases;
         this.needArgs = 0;
@@ -55,7 +59,7 @@ public abstract class AbstractCommand implements Command {
         this.reply = reply;
     }
 
-    public AbstractCommand(String... aliases) {
+    protected AbstractCommand(@NotNull String... aliases) {
         this.name = aliases[0];
         this.aliases = aliases;
         this.needArgs = 0;
@@ -79,12 +83,17 @@ public abstract class AbstractCommand implements Command {
     }
 
     @Override
+    public void onReply(Consumer<CommandContext> contextConsumer) {
+        // TODO
+    }
+
+    @Override
     public ImmutableList<String> getAliases() {
         return ImmutableList.copyOf(aliases);
     }
 
     @Override
-    public void call(IncomingMessage incomingMessage, String... args) {
+    public void call(@NotNull IncomingMessage incomingMessage, String... args) {
         if (needArgs >= 0)
             if (args.length <= needArgs)
                 return;
@@ -95,5 +104,8 @@ public abstract class AbstractCommand implements Command {
         execute(new VkCommandContext(incomingMessage, args));
     }
 
-    public abstract void execute(CommandContext commandContext);
+    protected abstract void execute(@NotNull CommandContext commandContext);
+
+    protected abstract Keyboard initKeyboard();
+
 }

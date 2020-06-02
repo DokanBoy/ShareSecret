@@ -2,7 +2,7 @@ package pw.zakharow.vkbot;
 
 import pw.zakharow.vkbot.config.Configuration;
 import pw.zakharow.vkbot.config.HoconConfiguration;
-import pw.zakharow.vkbot.model.BotCredentials;
+import pw.zakharow.vkbot.credentials.BotCredentials;
 
 import java.nio.file.Paths;
 
@@ -10,7 +10,7 @@ import java.nio.file.Paths;
  * @author Alexey Zakharov
  * @date 31.05.2020
  */
-public class Launch {
+public final class Launch {
 
     private static Configuration config;
 
