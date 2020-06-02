@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import pw.zakharow.vkbot.command.impl.CreateSecretCommand;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -32,13 +33,23 @@ public final class CommandManager {
         client.onMessage(event -> {
             COMMAND_REGISTRY.forEach(command -> {
                 IncomingMessage message = event.getMessage();
-                String target = getArgs(message.getText())[0];
+                String name = getCommand(message.getText());
+                String[] args = getArgs(message.getText());
 
-                if (command.getName().equals(target) || command.getAliases().contains(target)) {
-                    command.call(message, getArgs(message.getText()));
+                log.debug("Handled command name=" + name
+                        + ", from id =" + message.getFromId()
+                        + ", message =" + message.getText()
+                        + ", where args = " + Arrays.toString(args));
+
+                if (command.getName().equals(name) || command.getAliases().contains(name)) {
+                    command.call(message, args);
                 }
             });
         });
+    }
+
+    private String getCommand(String sourceText) {
+        return sourceText.split(" ")[0];
     }
 
     private String[] getArgs(String sourceText) {
