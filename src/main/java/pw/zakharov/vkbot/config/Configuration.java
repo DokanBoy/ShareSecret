@@ -1,4 +1,4 @@
-package pw.zakharow.vkbot.config;
+package pw.zakharov.vkbot.config;
 
 import com.typesafe.config.Config;
 import org.jetbrains.annotations.NotNull;

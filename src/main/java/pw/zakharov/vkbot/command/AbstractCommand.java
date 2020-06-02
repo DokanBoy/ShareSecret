@@ -1,14 +1,14 @@
-package pw.zakharow.vkbot.command;
+package pw.zakharov.vkbot.command;
 
 import com.google.common.collect.ImmutableList;
 import com.petersamokhin.vksdk.core.client.VkApiClient;
 import com.petersamokhin.vksdk.core.model.event.IncomingMessage;
 import com.petersamokhin.vksdk.core.model.objects.Keyboard;
 import org.jetbrains.annotations.NotNull;
-import pw.zakharow.vkbot.Launch;
-import pw.zakharow.vkbot.VkBot;
-import pw.zakharow.vkbot.command.context.CommandContext;
-import pw.zakharow.vkbot.command.context.VkCommandContext;
+import pw.zakharov.vkbot.Launch;
+import pw.zakharov.vkbot.command.context.CommandContext;
+import pw.zakharov.vkbot.VkBot;
+import pw.zakharov.vkbot.command.context.VkCommandContext;
 
 import java.util.function.Consumer;
 

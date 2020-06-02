@@ -1,13 +1,13 @@
-package pw.zakharow.vkbot.command.impl;
+package pw.zakharov.vkbot.command.impl;
 
 import com.google.common.collect.Lists;
 import com.petersamokhin.vksdk.core.model.objects.Keyboard;
 import com.petersamokhin.vksdk.core.model.objects.Message;
 import org.jetbrains.annotations.NotNull;
-import pw.zakharow.vkbot.command.AbstractCommand;
-import pw.zakharow.vkbot.command.context.CommandContext;
-import pw.zakharow.vkbot.persistance.Secret;
-import pw.zakharow.vkbot.persistance.User;
+import pw.zakharov.vkbot.command.AbstractCommand;
+import pw.zakharov.vkbot.command.context.CommandContext;
+import pw.zakharov.vkbot.persistance.User;
+import pw.zakharov.vkbot.persistance.Secret;
 
 import java.util.List;
 

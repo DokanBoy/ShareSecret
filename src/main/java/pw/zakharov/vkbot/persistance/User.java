@@ -1,4 +1,4 @@
-package pw.zakharow.vkbot.persistance;
+package pw.zakharov.vkbot.persistance;
 
 import com.google.common.collect.Lists;
 

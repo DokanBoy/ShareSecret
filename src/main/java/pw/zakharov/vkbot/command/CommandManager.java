@@ -1,10 +1,10 @@
-package pw.zakharow.vkbot.command;
+package pw.zakharov.vkbot.command;
 
 import com.petersamokhin.vksdk.core.client.VkApiClient;
 import com.petersamokhin.vksdk.core.model.event.IncomingMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pw.zakharow.vkbot.command.impl.CreateSecretCommand;
+import pw.zakharov.vkbot.command.impl.CreateSecretCommand;
 
 import java.util.ArrayList;
 import java.util.Arrays;

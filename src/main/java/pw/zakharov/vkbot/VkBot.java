@@ -1,4 +1,4 @@
-package pw.zakharow.vkbot;
+package pw.zakharov.vkbot;
 
 import com.petersamokhin.vksdk.core.client.VkApiClient;
 import com.petersamokhin.vksdk.core.http.HttpClient;
@@ -6,7 +6,7 @@ import com.petersamokhin.vksdk.core.model.VkSettings;
 import com.petersamokhin.vksdk.http.VkOkHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pw.zakharow.vkbot.command.CommandManager;
+import pw.zakharov.vkbot.command.CommandManager;
 
 /**
  * @author Alexey Zakharov

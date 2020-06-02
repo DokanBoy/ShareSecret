@@ -1,8 +1,8 @@
-package pw.zakharow.vkbot;
+package pw.zakharov.vkbot;
 
-import pw.zakharow.vkbot.config.Configuration;
-import pw.zakharow.vkbot.config.HoconConfiguration;
-import pw.zakharow.vkbot.credentials.BotCredentials;
+import pw.zakharov.vkbot.credentials.BotCredentials;
+import pw.zakharov.vkbot.config.Configuration;
+import pw.zakharov.vkbot.config.HoconConfiguration;
 
 import java.nio.file.Paths;
 

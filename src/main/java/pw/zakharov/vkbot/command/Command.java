@@ -1,9 +1,9 @@
-package pw.zakharow.vkbot.command;
+package pw.zakharov.vkbot.command;
 
 import com.google.common.collect.ImmutableList;
 import com.petersamokhin.vksdk.core.model.event.IncomingMessage;
 import org.jetbrains.annotations.NotNull;
-import pw.zakharow.vkbot.command.context.CommandContext;
+import pw.zakharov.vkbot.command.context.CommandContext;
 
 import java.util.function.Consumer;
 
