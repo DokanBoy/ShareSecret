@@ -6,9 +6,10 @@ import com.petersamokhin.vksdk.core.model.event.IncomingMessage;
 import com.petersamokhin.vksdk.core.model.objects.Keyboard;
 import org.jetbrains.annotations.NotNull;
 import pw.zakharov.vkbot.Launch;
-import pw.zakharov.vkbot.command.context.CommandContext;
 import pw.zakharov.vkbot.VkBot;
+import pw.zakharov.vkbot.command.context.CommandContext;
 import pw.zakharov.vkbot.command.context.VkCommandContext;
+import pw.zakharov.vkbot.config.Configuration;
 
 import java.util.function.Consumer;
 
@@ -19,6 +20,8 @@ import java.util.function.Consumer;
 public abstract class AbstractCommand implements Command {
 
     protected static final VkApiClient client = VkBot.getClient();
+
+    private static final Configuration config = Launch.getConfig();
 
     private final String name;
     private final String[] aliases;
@@ -98,9 +101,10 @@ public abstract class AbstractCommand implements Command {
             if (args.length <= needArgs)
                 return;
 
-        if (level == 1 && !Launch.getConfig().getIntegerList("admins").contains(incomingMessage.getFromId()))
+        if (level == 1 && !config.getIntegerList("admins").contains(incomingMessage.getFromId()))
             return;
 
+        // TODO: if user not contains in users repo then create.
         execute(new VkCommandContext(incomingMessage, args));
     }
 

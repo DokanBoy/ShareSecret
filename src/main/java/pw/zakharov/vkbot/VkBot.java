@@ -19,11 +19,18 @@ public final class VkBot {
     private static VkApiClient client;
 
     public VkBot(int groupId, String accessToken) {
+        log.info("Starting Http client.");
         HttpClient vkHttpClient = new VkOkHttpClient();
+
+        log.info("Starting Vk Api client.");
         client = new VkApiClient(groupId, accessToken, VkApiClient.Type.Community, new VkSettings(vkHttpClient));
+
+        log.info("Initialization CommandManager.");
         new CommandManager(client);
 
+        log.info("Trying to run LongPoll.");
         client.startLongPolling(true);
+        log.info("LongPoll has been successfully launched.");
     }
 
     public static VkApiClient getClient() {

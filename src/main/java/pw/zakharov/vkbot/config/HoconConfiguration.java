@@ -19,7 +19,7 @@ import java.util.List;
  * @author Alexey Zakharov
  * @date 26.04.2020
  */
-public class HoconConfiguration implements Configuration {
+public final class HoconConfiguration implements Configuration {
 
     private static final Logger log = LoggerFactory.getLogger(HoconConfiguration.class);
 
