@@ -1,9 +1,16 @@
 package pw.zakharov.vkbot.credentials;
 
+import lombok.Data;
+
 /**
  * @author Alexey Zakharov
  * @date 31.05.2020
  */
-public record BotCredentials(int groupId, String accessToken) {
+
+@Data
+public class BotCredentials {
+
+    private final int groupId;
+    private final String accessToken;
 
 }

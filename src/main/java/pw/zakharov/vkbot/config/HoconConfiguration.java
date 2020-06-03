@@ -68,7 +68,6 @@ public final class HoconConfiguration implements Configuration {
         return handle;
     }
 
-    @Nullable
     @Override
     public String getString(@NotNull String path, String def) {
         try {
@@ -89,23 +88,25 @@ public final class HoconConfiguration implements Configuration {
         }
     }
 
+    @Nullable
     @Override
     public List<String> getStringList(@NotNull String path) {
         try {
             return handle.getStringList(path);
         } catch (ConfigException.Missing e) {
             log.info("Path " + path + " not found");
-            return Collections.singletonList("Error");
+            return null;
         }
     }
 
+    @Nullable
     @Override
     public List<Integer> getIntegerList(@NotNull String path) {
         try {
             return handle.getIntList(path);
         } catch (ConfigException.Missing e) {
             log.info("Path " + path + " not found");
-            return Collections.singletonList(-1);
+            return null;
         }
     }
 

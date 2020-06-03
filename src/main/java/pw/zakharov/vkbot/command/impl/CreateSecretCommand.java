@@ -6,8 +6,8 @@ import com.petersamokhin.vksdk.core.model.objects.Message;
 import org.jetbrains.annotations.NotNull;
 import pw.zakharov.vkbot.command.AbstractCommand;
 import pw.zakharov.vkbot.command.context.CommandContext;
-import pw.zakharov.vkbot.persistance.User;
 import pw.zakharov.vkbot.persistance.Secret;
+import pw.zakharov.vkbot.persistance.User;
 
 import java.util.List;
 
@@ -33,11 +33,9 @@ public final class CreateSecretCommand extends AbstractCommand {
 
         new Message()
                 .peerId(commandContext.getSource().getPeerId())
-                .text("""
-                        Секрет создан #{id}!
-                        Текст: {text} 
-                        Как только появится первый лайк, тебе сразу придет оповещение.
-                        """
+                .text(("Секрет создан #{id}! " + '\n'
+                        + "Текст: {text} " + '\n'
+                        + "Как только появится первый лайк, тебе сразу придет оповещение.")
                         .replace("{text}", commandContext.getMessage())
                         .replace("{id}", String.valueOf(id))
                 )

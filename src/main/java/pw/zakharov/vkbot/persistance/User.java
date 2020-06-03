@@ -37,7 +37,7 @@ public class User {
     }
 
     public static User of(int id) {
-        return new User(id, null, List.of());
+        return new User(id, null, null);
     }
 
     public int getId() {

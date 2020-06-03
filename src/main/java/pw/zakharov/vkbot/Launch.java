@@ -2,9 +2,9 @@ package pw.zakharov.vkbot;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pw.zakharov.vkbot.credentials.BotCredentials;
 import pw.zakharov.vkbot.config.Configuration;
 import pw.zakharov.vkbot.config.HoconConfiguration;
-import pw.zakharov.vkbot.credentials.BotCredentials;
 
 import java.nio.file.Paths;
 
@@ -28,7 +28,7 @@ public final class Launch {
         log.info("Credentials uploaded successfully");
 
         log.info("Staring launcher for Vk Bot.");
-        new VkBot(credentials.groupId(), credentials.accessToken());
+        new VkBot(credentials.getGroupId(), credentials.getAccessToken());
         log.info("Good bye.");
     }
 
