@@ -8,6 +8,19 @@
     <artifactId>ShareSecret</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <developers>
+        <developer>
+            <name>Alexey Zakharov</name>
+            <roles>
+                <role>Project owner</role>
+                <role>Main developer</role>
+            </roles>
+            <url>zakharo.pw</url>
+            <email>alexey@zakharo.pw</email>
+            <timezone>UTC+7</timezone>
+        </developer>
+    </developers>
+
     <build>
         <defaultGoal>clean package</defaultGoal>
         <finalName>${project.name}</finalName>
@@ -46,7 +59,23 @@
                 </configuration>
             </plugin>
 
-
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <minimizeJar>true</minimizeJar>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                        </configuration>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
