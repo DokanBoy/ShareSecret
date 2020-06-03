@@ -39,7 +39,7 @@ public final class HoconConfiguration implements Configuration {
         if (notExistsDataFolder || Files.notExists(dataFolder)) {
             if (isResource) {
                 try {
-                    Files.copy(getClass().getResourceAsStream("/config.conf"), path);
+                    Files.copy(getClass().getResourceAsStream("config.conf"), path);
                 } catch (IOException e) {
                     log.warn("Exception due to copy resource", e);
                 }
