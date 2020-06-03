@@ -14,7 +14,7 @@ import java.nio.file.Paths;
  */
 public final class Launch {
 
-    private static final Logger log = LoggerFactory.getLogger(VkBot.class);
+    private static final Logger log = LoggerFactory.getLogger(Launch.class);
 
     private static Configuration config;
 
