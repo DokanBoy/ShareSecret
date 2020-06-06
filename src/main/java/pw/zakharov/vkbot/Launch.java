@@ -1,12 +1,9 @@
 package pw.zakharov.vkbot;
 
-import com.google.common.reflect.TypeToken;
 import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
-import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pw.zakharov.vkbot.credentials.BotCredentials;
 import pw.zakharov.vkbot.util.ConfigUtil;
 
 import java.io.IOException;
@@ -27,7 +24,7 @@ public final class Launch {
         throw new UnsupportedOperationException("This class cannot be instantiated");
     }
 
-    public static void main(String[] args) throws IOException, ObjectMappingException {
+    public static void main(String[] args) throws IOException {
         log.info("Welcome back!");
 
         log.info("Loading configuration file.");
@@ -48,14 +45,11 @@ public final class Launch {
             System.exit(2);
         }
 
-        BotCredentials credentials = new BotCredentials(
-                config.getNode("credentials").getNode("groupId").getInt(),
-                config.getNode("credentials").getNode("accessToken").getString(),
-                config.getNode("admins").getList(TypeToken.of(Integer.class))
-        );
-
         log.info("Staring launcher for Vk Bot.");
-        new VkBot(credentials.getGroupId(), credentials.getAccessToken());
+        new VkBot(
+                config.getNode("credentials").getNode("groupId").getInt(),
+                config.getNode("credentials").getNode("accessToken").getString()
+        );
         log.info("Good bye.");
     }
 
