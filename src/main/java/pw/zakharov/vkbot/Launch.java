@@ -1,7 +1,9 @@
 package pw.zakharov.vkbot;
 
+import com.google.common.reflect.TypeToken;
 import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
+import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pw.zakharov.vkbot.credentials.BotCredentials;
@@ -25,7 +27,7 @@ public final class Launch {
         throw new UnsupportedOperationException("This class cannot be instantiated");
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ObjectMappingException {
         log.info("Welcome back!");
 
         log.info("Loading configuration file.");
@@ -34,7 +36,7 @@ public final class Launch {
             log.info("Default config saved.");
         }
 
-        log.debug("Config file created? " + Files.exists(Paths.get("config.conf")));
+        log.debug("Config file exist? " + Files.exists(Paths.get("config.conf")));
         HoconConfigurationLoader loader = HoconConfigurationLoader.builder()
                 .setPath(Paths.get("config.conf"))
                 .build();
@@ -48,7 +50,8 @@ public final class Launch {
 
         BotCredentials credentials = new BotCredentials(
                 config.getNode("credentials").getNode("groupId").getInt(),
-                config.getNode("credentials").getNode("accessToken").getString()
+                config.getNode("credentials").getNode("accessToken").getString(),
+                config.getNode("admins").getList(TypeToken.of(Integer.class))
         );
 
         log.info("Staring launcher for Vk Bot.");

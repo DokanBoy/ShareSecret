@@ -116,6 +116,6 @@ public abstract class AbstractCommand implements Command {
 
     protected abstract void execute(@NotNull CommandContext commandContext);
 
-    protected abstract Keyboard initKeyboard();
+    protected abstract Keyboard getKeyboard();
 
 }

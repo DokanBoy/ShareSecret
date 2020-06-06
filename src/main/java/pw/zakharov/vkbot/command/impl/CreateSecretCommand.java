@@ -6,8 +6,6 @@ import com.petersamokhin.vksdk.core.model.objects.Message;
 import org.jetbrains.annotations.NotNull;
 import pw.zakharov.vkbot.command.AbstractCommand;
 import pw.zakharov.vkbot.command.context.CommandContext;
-import pw.zakharov.vkbot.persistance.Secret;
-import pw.zakharov.vkbot.persistance.User;
 
 import java.util.List;
 
@@ -17,36 +15,37 @@ import java.util.List;
  */
 public final class CreateSecretCommand extends AbstractCommand {
 
-    private final Keyboard keyboard;
+    private static int secretId = 0;
 
     public CreateSecretCommand() {
         super("добавить");
 
         this.commandUsage = getUsage() + getName() + " <ваш секрет>";
-        keyboard = initKeyboard();
     }
 
     @Override
     protected void execute(@NotNull CommandContext commandContext) {
-        int id = 1; // TODO
-        new Secret(User.of(id), commandContext.getMessage());
+        //new Secret(User.of(commandContext.getSource().getFromId()), commandContext.getMessage());
 
         new Message()
                 .peerId(commandContext.getSource().getPeerId())
-                .text(("Секрет создан #{id}! " + '\n'
+                .text(("История #{id} создана! " + '\n'
                         + "Текст: {text} " + '\n'
+                        + '\n'
                         + "Как только появится первый лайк, тебе сразу придет оповещение.")
                         .replace("{text}", commandContext.getMessage())
-                        .replace("{id}", String.valueOf(id))
+                        .replace("{id}", String.valueOf(secretId))
                 )
-                .keyboard(keyboard)
+                .keyboard(getKeyboard())
                 .sendFrom(client)
                 .execute();
+
+        ++secretId;
     }
 
     // TODO: Refactor for init this method
     @Override
-    protected Keyboard initKeyboard() {
+    protected Keyboard getKeyboard() {
         List<List<Keyboard.Button>> keyboardButtons = Lists.newArrayList();
 
 

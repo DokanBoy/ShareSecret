@@ -64,10 +64,13 @@ public final class CommandManager {
 
     private String[] getArgs(String sourceText) {
         String[] source = sourceText.split(" ");
-        String[] args = new String[source.length - 1];
+        log.debug("Source text in array: " + source.toString());
 
-        for (int i = 2; i < source.length - 3; i++) {
-            args[i - 2] = source[i];
+        int newLength = source.length - 1;
+        String[] args = new String[newLength];
+
+        for (int i = 1; i <= newLength; i++) {
+            args[i - 1] = source[i];
         }
         return args;
     }

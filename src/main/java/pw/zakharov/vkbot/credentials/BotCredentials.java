@@ -2,6 +2,8 @@ package pw.zakharov.vkbot.credentials;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @author Alexey Zakharov
  * @date 31.05.2020
@@ -12,5 +14,6 @@ public class BotCredentials {
 
     private final int groupId;
     private final String accessToken;
+    private final List<Integer> admins;
 
 }
