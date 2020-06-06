@@ -1,11 +1,14 @@
 package pw.zakharov.vkbot;
 
+import ninja.leaping.configurate.ConfigurationNode;
+import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pw.zakharov.vkbot.credentials.BotCredentials;
-import pw.zakharov.vkbot.config.Configuration;
-import pw.zakharov.vkbot.config.HoconConfiguration;
+import pw.zakharov.vkbot.util.ConfigUtil;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 
 /**
@@ -16,23 +19,44 @@ public final class Launch {
 
     private static final Logger log = LoggerFactory.getLogger(Launch.class);
 
-    private static Configuration config;
+    private static ConfigurationNode config;
 
-    public static void main(String[] args) {
+    private Launch() {
+        throw new UnsupportedOperationException("This class cannot be instantiated");
+    }
+
+    public static void main(String[] args) throws IOException {
         log.info("Welcome back!");
 
         log.info("Loading configuration file.");
-        config = new HoconConfiguration(Paths.get("/"), "config.conf", true);
-        BotCredentials credentials = new BotCredentials(config.getHandle().getInt("credentials.groupId"),
-                config.getHandle().getString("credentials.accessToken"));
-        log.info("Credentials uploaded successfully");
+        if (Files.notExists(Paths.get("config.conf"))) {
+            ConfigUtil.saveDefaultConfig();
+            log.info("Default config saved.");
+        }
+
+        log.debug("Config file created? " + Files.exists(Paths.get("config.conf")));
+        HoconConfigurationLoader loader = HoconConfigurationLoader.builder()
+                .setPath(Paths.get("config.conf"))
+                .build();
+        try {
+            config = loader.load();
+            log.info("Configuration file loaded successfully!");
+        } catch (final IOException e) {
+            log.error("An error occurred while loading this configuration.", e);
+            System.exit(2);
+        }
+
+        BotCredentials credentials = new BotCredentials(
+                config.getNode("credentials").getNode("groupId").getInt(),
+                config.getNode("credentials").getNode("accessToken").getString()
+        );
 
         log.info("Staring launcher for Vk Bot.");
         new VkBot(credentials.getGroupId(), credentials.getAccessToken());
         log.info("Good bye.");
     }
 
-    public static Configuration getConfig() {
+    public static ConfigurationNode getConfig() {
         return config;
     }
 

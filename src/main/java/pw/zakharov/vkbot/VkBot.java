@@ -19,6 +19,9 @@ public final class VkBot {
     private static VkApiClient client;
 
     public VkBot(int groupId, String accessToken) {
+        log.debug("Group Id: " + groupId);
+        log.debug("Access token: " + accessToken);
+
         log.info("Starting Http client.");
         HttpClient vkHttpClient = new VkOkHttpClient();
 
@@ -28,9 +31,8 @@ public final class VkBot {
         log.info("Initialization CommandManager.");
         new CommandManager(client);
 
-        log.info("Trying to run LongPoll.");
-        client.startLongPolling(true);
-        log.info("LongPoll has been successfully launched.");
+        log.info("Starting LongPoll.");
+        client.startLongPolling();
     }
 
     public static VkApiClient getClient() {

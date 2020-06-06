@@ -2,6 +2,7 @@ package pw.zakharov.vkbot.command;
 
 import com.petersamokhin.vksdk.core.client.VkApiClient;
 import com.petersamokhin.vksdk.core.model.event.IncomingMessage;
+import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pw.zakharov.vkbot.command.impl.CreateSecretCommand;
@@ -31,6 +32,10 @@ public final class CommandManager {
 
     private void handle() {
         client.onMessage(event -> {
+            log.debug("Handled message =" + event.getMessage()
+                    + ", from id =" + event.getMessage().getFromId()
+            );
+
             COMMAND_REGISTRY.forEach(command -> {
                 IncomingMessage message = event.getMessage();
                 String name = getCommand(message.getText());
@@ -39,10 +44,15 @@ public final class CommandManager {
                 log.debug("Handled command name=" + name
                         + ", from id =" + message.getFromId()
                         + ", message =" + message.getText()
-                        + ", where args = " + Arrays.toString(args));
+                        + ", where args = " + Arrays.toString(args)
+                );
 
                 if (command.getName().equals(name) || command.getAliases().contains(name)) {
-                    command.call(message, args);
+                    try { // TODO: избавиться от try-catch
+                        command.call(message, args);
+                    } catch (ObjectMappingException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
         });

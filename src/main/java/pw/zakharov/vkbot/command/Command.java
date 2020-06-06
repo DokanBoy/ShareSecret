@@ -2,6 +2,7 @@ package pw.zakharov.vkbot.command;
 
 import com.google.common.collect.ImmutableList;
 import com.petersamokhin.vksdk.core.model.event.IncomingMessage;
+import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 import org.jetbrains.annotations.NotNull;
 import pw.zakharov.vkbot.command.context.CommandContext;
 
@@ -23,6 +24,6 @@ public interface Command {
 
     void onReply(Consumer<CommandContext> contextConsumer);
 
-    void call(@NotNull IncomingMessage incomingMessage, String... args);
+    void call(@NotNull IncomingMessage incomingMessage, String... args) throws ObjectMappingException;
 
 }
