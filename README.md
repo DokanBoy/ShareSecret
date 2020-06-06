@@ -1,2 +1,2 @@
 # ShareSecret
-Vk Bot for sharing your personal sectets anonymously
+Vk Bot for sharing your personal stories anonymously.
