@@ -5,7 +5,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pw.zakharov.vkbot.persistance.Secret;
+import pw.zakharov.vkbot.persistance.Story;
 import pw.zakharov.vkbot.persistance.User;
 
 /**
@@ -27,7 +27,7 @@ public final class HibernateSessionFactoryUtil {
             try {
                 Configuration configuration = new Configuration().configure();
                 configuration.addAnnotatedClass(User.class);
-                configuration.addAnnotatedClass(Secret.class);
+                configuration.addAnnotatedClass(Story.class);
                 StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
                 sessionFactory = configuration.buildSessionFactory(builder.build());
 

@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "secrets")
-public class Secret {
+public class Story {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,7 +28,7 @@ public class Secret {
     @Column(name = "dislikes")
     private int dislikes;
 
-    public Secret(User owner, String text) {
+    public Story(User owner, String text) {
         this.owner = owner;
         this.text = text;
 

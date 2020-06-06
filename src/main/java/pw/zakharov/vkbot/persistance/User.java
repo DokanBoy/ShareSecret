@@ -22,18 +22,18 @@ public class User {
     private final String name;
 
     @OneToMany(mappedBy = "secrets", cascade = CascadeType.ALL, orphanRemoval = true)
-    private final List<Secret> secrets;
+    private final List<Story> stories;
 
-    public User(int id, String name, List<Secret> secrets) {
+    public User(int id, String name, List<Story> stories) {
         this.id = id;
         this.name = name;
-        this.secrets = secrets;
+        this.stories = stories;
     }
 
     public User(int id, String name) {
         this.id = id;
         this.name = name;
-        this.secrets = Lists.newArrayList();
+        this.stories = Lists.newArrayList();
     }
 
     public static User of(int id) {
@@ -48,8 +48,8 @@ public class User {
         return name;
     }
 
-    public List<Secret> getSecrets() {
-        return secrets;
+    public List<Story> getStories() {
+        return stories;
     }
 
 }
