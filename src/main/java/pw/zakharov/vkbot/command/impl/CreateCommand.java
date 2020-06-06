@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.petersamokhin.vksdk.core.model.objects.Keyboard;
 import com.petersamokhin.vksdk.core.model.objects.Message;
 import org.jetbrains.annotations.NotNull;
+import pw.zakharov.vkbot.Launch;
 import pw.zakharov.vkbot.command.AbstractCommand;
 import pw.zakharov.vkbot.command.context.CommandContext;
 
@@ -13,20 +14,34 @@ import java.util.List;
  * @author Alexey Zakharov
  * @date 30.04.2020
  */
-public final class CreateSecretCommand extends AbstractCommand {
+public final class CreateCommand extends AbstractCommand {
+
+    private static final int MIN_WORDS = Launch.getConfig().getNode("settings").getNode("history_min_words").getInt();
 
     private static int secretId = 0;
 
-    public CreateSecretCommand() {
+    public CreateCommand() {
         super("добавить");
 
-        this.commandUsage = getUsage() + getName() + " <ваш секрет>";
+        this.commandUsage = getUsage() + getName() + " <твоя история>";
     }
 
     @Override
     protected void execute(@NotNull CommandContext commandContext) {
-        //new Secret(User.of(commandContext.getSource().getFromId()), commandContext.getMessage());
+        if (commandContext.args().size() < MIN_WORDS) {
+            new Message()
+                    .peerId(commandContext.getSource().getPeerId())
+                    .text(("Минимальный размер истории {min_words}. " + '\n'
+                            + "Размер твоей истории: {now_words} ")
+                            .replace("{min_words}", String.valueOf(MIN_WORDS))
+                            .replace("{now_words}", String.valueOf(commandContext.args().size()))
+                    )
+                    .sendFrom(client)
+                    .execute();
+            return;
+        }
 
+        //new Secret(User.of(commandContext.getSource().getFromId()), commandContext.getMessage());
         new Message()
                 .peerId(commandContext.getSource().getPeerId())
                 .text(("История #{id} создана! " + '\n'
@@ -48,47 +63,30 @@ public final class CreateSecretCommand extends AbstractCommand {
     protected Keyboard getKeyboard() {
         List<List<Keyboard.Button>> keyboardButtons = Lists.newArrayList();
 
-
         List<Keyboard.Button> firstRow = Lists.newArrayList();
 
         firstRow.add(new Keyboard.Button(
-                new Keyboard.Button.Action(Keyboard.Button.Action.Type.TEXT, "Key #1",
+                new Keyboard.Button.Action(Keyboard.Button.Action.Type.TEXT, "Нравится",
                         null, null, null, null, null),
                 Keyboard.Button.Color.POSITIVE
         ));
         firstRow.add(new Keyboard.Button(
-                new Keyboard.Button.Action(Keyboard.Button.Action.Type.TEXT, "Key #2",
-                        null, null, null, null, null),
-                Keyboard.Button.Color.PRIMARY
-        ));
-        firstRow.add(new Keyboard.Button(
-                new Keyboard.Button.Action(Keyboard.Button.Action.Type.TEXT, "Key #3",
+                new Keyboard.Button.Action(Keyboard.Button.Action.Type.TEXT, "Не нравится",
                         null, null, null, null, null),
                 Keyboard.Button.Color.NEGATIVE
         ));
-
-        keyboardButtons.add(firstRow);
-
-
-        List<Keyboard.Button> secondRow = Lists.newArrayList();
-
-        secondRow.add(new Keyboard.Button(
-                new Keyboard.Button.Action(Keyboard.Button.Action.Type.TEXT, "Key #4",
+        firstRow.add(new Keyboard.Button(
+                new Keyboard.Button.Action(Keyboard.Button.Action.Type.TEXT, "Жалоба",
                         null, null, null, null, null),
                 Keyboard.Button.Color.SECONDARY
         ));
-        secondRow.add(new Keyboard.Button(
-                new Keyboard.Button.Action(Keyboard.Button.Action.Type.TEXT, "Key #5",
+        firstRow.add(new Keyboard.Button(
+                new Keyboard.Button.Action(Keyboard.Button.Action.Type.TEXT, "Настройки",
                         null, null, null, null, null),
-                Keyboard.Button.Color.POSITIVE
-        ));
-        secondRow.add(new Keyboard.Button(
-                new Keyboard.Button.Action(Keyboard.Button.Action.Type.TEXT, "Key #6",
-                        null, null, null, null, null),
-                Keyboard.Button.Color.NEGATIVE
+                Keyboard.Button.Color.SECONDARY
         ));
 
-        keyboardButtons.add(secondRow);
+        keyboardButtons.add(firstRow);
 
         return new Keyboard(keyboardButtons, true, false, null);
     }

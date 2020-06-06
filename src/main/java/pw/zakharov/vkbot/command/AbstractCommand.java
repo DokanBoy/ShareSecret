@@ -27,7 +27,7 @@ public abstract class AbstractCommand implements Command {
 
     private final String name;
     private final String[] aliases;
-    private final int needArgs;
+    private final int minArgs;
     private final int level;
     private final boolean reply;
 
@@ -35,15 +35,15 @@ public abstract class AbstractCommand implements Command {
 
     /**
      * @param name     Имя команды
-     * @param needArgs Кол-во нужных аргументов
+     * @param minArgs Кол-во нужных аргументов
      * @param level    Права для ее выполнения:
      *                 0 - Пользователь,
      *                 1 - Админ
      */
-    protected AbstractCommand(@NotNull String name, int needArgs, int level, boolean reply, String... aliases) {
+    protected AbstractCommand(@NotNull String name, int minArgs, int level, boolean reply, String... aliases) {
         this.name = name;
         this.aliases = aliases;
-        this.needArgs = needArgs;
+        this.minArgs = minArgs;
         this.level = level;
         this.reply = reply;
     }
@@ -51,7 +51,7 @@ public abstract class AbstractCommand implements Command {
     protected AbstractCommand(@NotNull String name, int level, String... aliases) {
         this.name = name;
         this.aliases = aliases;
-        this.needArgs = 0;
+        this.minArgs = 0;
         this.level = level;
         this.reply = false;
     }
@@ -59,7 +59,7 @@ public abstract class AbstractCommand implements Command {
     protected AbstractCommand(@NotNull String name, boolean reply, String... aliases) {
         this.name = name;
         this.aliases = aliases;
-        this.needArgs = 0;
+        this.minArgs = 0;
         this.level = 0;
         this.reply = reply;
     }
@@ -67,7 +67,7 @@ public abstract class AbstractCommand implements Command {
     protected AbstractCommand(@NotNull String... aliases) {
         this.name = aliases[0];
         this.aliases = aliases;
-        this.needArgs = 0;
+        this.minArgs = 0;
         this.level = 0;
         this.reply = false;
     }
@@ -99,8 +99,8 @@ public abstract class AbstractCommand implements Command {
 
     @Override
     public void call(@NotNull IncomingMessage incomingMessage, String... args) {
-        if (needArgs >= 0)
-            if (args.length <= needArgs)
+        if (minArgs > 0)
+            if (args.length <= minArgs)
                 return;
 
         try {

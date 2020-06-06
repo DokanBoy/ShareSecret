@@ -5,7 +5,7 @@ import com.petersamokhin.vksdk.core.model.event.IncomingMessage;
 import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pw.zakharov.vkbot.command.impl.CreateSecretCommand;
+import pw.zakharov.vkbot.command.impl.CreateCommand;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,15 +25,15 @@ public final class CommandManager {
     public CommandManager(VkApiClient client) {
         this.client = client;
 
-        COMMAND_REGISTRY.add(new CreateSecretCommand());
+        COMMAND_REGISTRY.add(new CreateCommand());
 
         handle();
     }
 
     private void handle() {
         client.onMessage(event -> {
-            log.debug("Handled message =" + event.getMessage()
-                    + ", from id =" + event.getMessage().getFromId()
+            log.debug("Handled message = " + event.getMessage()
+                    + ", from id = " + event.getMessage().getFromId()
             );
 
             COMMAND_REGISTRY.forEach(command -> {
@@ -41,9 +41,9 @@ public final class CommandManager {
                 String name = getCommand(message.getText());
                 String[] args = getArgs(message.getText());
 
-                log.debug("Handled command name=" + name
-                        + ", from id =" + message.getFromId()
-                        + ", message =" + message.getText()
+                log.debug("Handled command name= " + name
+                        + ", from id = " + message.getFromId()
+                        + ", message = " + message.getText()
                         + ", where args = " + Arrays.toString(args)
                 );
 
@@ -64,7 +64,6 @@ public final class CommandManager {
 
     private String[] getArgs(String sourceText) {
         String[] source = sourceText.split(" ");
-        log.debug("Source text in array: " + source.toString());
 
         int newLength = source.length - 1;
         String[] args = new String[newLength];
