@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>pw.zakharov</groupId>
-    <artifactId>ShareSecret</artifactId>
+    <artifactId>ShareYourStory</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <developers>
@@ -15,8 +15,8 @@
                 <role>Project owner</role>
                 <role>Main developer</role>
             </roles>
-            <url>zakharo.pw</url>
-            <email>alexey@zakharo.pw</email>
+            <url>zakharov.pw</url>
+            <email>alexey@zakharov.pw</email>
             <timezone>UTC+7</timezone>
         </developer>
     </developers>

@@ -13,7 +13,7 @@ import java.io.OutputStream;
  * @author Alexey Zakharov
  * @date 06.06.2020
  */
-public class ConfigUtil {
+public final class ConfigUtil {
 
     private static final Logger log = LoggerFactory.getLogger(ConfigUtil.class);
 

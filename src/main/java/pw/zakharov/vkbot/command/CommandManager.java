@@ -32,8 +32,8 @@ public final class CommandManager {
 
     private void handle() {
         client.onMessage(event -> {
-            log.debug("Handled message = " + event.getMessage()
-                    + ", from id = " + event.getMessage().getFromId()
+            log.debug("Handled message=" + event.getMessage()
+                    + ", from id=" + event.getMessage().getFromId()
             );
 
             COMMAND_REGISTRY.forEach(command -> {
@@ -41,10 +41,10 @@ public final class CommandManager {
                 String name = getCommand(message.getText());
                 String[] args = getArgs(message.getText());
 
-                log.debug("Handled command name= " + name
-                        + ", from id = " + message.getFromId()
-                        + ", message = " + message.getText()
-                        + ", where args = " + Arrays.toString(args)
+                log.debug("Handled command name=" + name
+                        + ", from id=" + message.getFromId()
+                        + ", message=" + message.getText()
+                        + ", where args=" + Arrays.toString(args)
                 );
 
                 if (command.getName().equals(name) || command.getAliases().contains(name)) {

@@ -17,7 +17,8 @@ import java.util.List;
  */
 public final class CreateCommand extends AbstractCommand {
 
-    private static final int MIN_WORDS = Launch.getConfig().getNode("settings").getNode("history_min_words").getInt();
+    private static final int MIN_WORDS = Launch.getConfig().getNode("settings").getNode("story_min_words").getInt();
+    private static final int MAX_WORDS = Launch.getConfig().getNode("settings").getNode("story_max_words").getInt();
 
     private static int secretId = 0;
 
@@ -41,24 +42,35 @@ public final class CreateCommand extends AbstractCommand {
                     .execute();
             return;
         }
-        String history = Arrays.toString(commandContext.args().toArray(new String[]{}));
-        history = history.substring(1, history.length() - 1).replace(",", "");
 
+        if (commandContext.args().size() > MAX_WORDS) {
+            new Message()
+                    .peerId(commandContext.getSource().getPeerId())
+                    .text(("Максимальный размер истории {max_words} слов." + '\n'
+                            + "Размер твоей истории: {now_words} ")
+                            .replace("{max_words}", String.valueOf(MAX_WORDS))
+                            .replace("{now_words}", String.valueOf(commandContext.args().size()))
+                    )
+                    .sendFrom(client)
+                    .execute();
+            return;
+        }
+
+        String story = Arrays.toString(commandContext.args().toArray(new String[]{}));
+        story = story.substring(1, story.length() - 1).replace(",", "");
         //new Secret(User.of(commandContext.getSource().getFromId()), history);
+
         new Message()
                 .peerId(commandContext.getSource().getPeerId())
-                .text(("История #{id} создана! " + '\n'
+                .text(("Новая история создана! " + '\n'
                         + "Текст: {text} " + '\n'
                         + '\n'
                         + "Как только появится первый лайк, тебе сразу придет оповещение.")
-                        .replace("{text}", history)
-                        .replace("{id}", String.valueOf(secretId))
+                        .replace("{text}", story)
                 )
                 .keyboard(getKeyboard())
                 .sendFrom(client)
                 .execute();
-
-        ++secretId;
     }
 
     // TODO: Refactor for init this method
