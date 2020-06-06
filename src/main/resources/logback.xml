@@ -5,7 +5,7 @@
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>
-                [%d{HH:mm:ss} %t/%level] [%logger]: %msg%n
+                [%d{HH:mm:ss} %level] [%logger]: %msg%n
             </pattern>
         </encoder>
     </appender>
@@ -24,7 +24,7 @@
         </rollingPolicy>
 
         <encoder>
-            <pattern>[%d{dd/MM/yyyy HH:mm:ss} %t/%level] [%logger]: %msg%n</pattern>
+            <pattern>[%d{dd/MM/yyyy HH:mm:ss} %level] [%logger]: %msg%n</pattern>
         </encoder>
     </appender>
 

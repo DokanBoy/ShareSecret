@@ -5,14 +5,16 @@ import com.google.common.reflect.TypeToken;
 import com.petersamokhin.vksdk.core.client.VkApiClient;
 import com.petersamokhin.vksdk.core.model.event.IncomingMessage;
 import com.petersamokhin.vksdk.core.model.objects.Keyboard;
-import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pw.zakharov.vkbot.Launch;
 import pw.zakharov.vkbot.VkBot;
 import pw.zakharov.vkbot.command.context.CommandContext;
 import pw.zakharov.vkbot.command.context.VkCommandContext;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 /**
@@ -23,7 +25,7 @@ public abstract class AbstractCommand implements Command {
 
     protected static final VkApiClient client = VkBot.getClient();
 
-    private static final ConfigurationNode config = Launch.getConfig();
+    protected final Logger log = LoggerFactory.getLogger(getClass());
 
     private final String name;
     private final String[] aliases;
@@ -34,34 +36,26 @@ public abstract class AbstractCommand implements Command {
     protected String commandUsage = "Вы неправильно используйте команду!\nИспользуйте: ";
 
     /**
-     * @param name     Имя команды
+     * @param name    Имя команды
      * @param minArgs Кол-во нужных аргументов
-     * @param level    Права для ее выполнения:
-     *                 0 - Пользователь,
-     *                 1 - Админ
+     * @param level   Права для ее выполнения:
+     *                0 - Пользователь,
+     *                1 - Админ
      */
-    protected AbstractCommand(@NotNull String name, int minArgs, int level, boolean reply, String... aliases) {
+    protected AbstractCommand(@NotNull String name, int minArgs, int level, String... aliases) {
         this.name = name;
         this.aliases = aliases;
         this.minArgs = minArgs;
         this.level = level;
-        this.reply = reply;
-    }
-
-    protected AbstractCommand(@NotNull String name, int level, String... aliases) {
-        this.name = name;
-        this.aliases = aliases;
-        this.minArgs = 0;
-        this.level = level;
         this.reply = false;
     }
 
-    protected AbstractCommand(@NotNull String name, boolean reply, String... aliases) {
-        this.name = name;
+    protected AbstractCommand(int minArgs, @NotNull String... aliases) {
+        this.name = aliases[0];
         this.aliases = aliases;
-        this.minArgs = 0;
+        this.minArgs = minArgs;
         this.level = 0;
-        this.reply = reply;
+        this.reply = false;
     }
 
     protected AbstractCommand(@NotNull String... aliases) {
@@ -103,11 +97,14 @@ public abstract class AbstractCommand implements Command {
             if (args.length <= minArgs)
                 return;
 
-        try {
-            if (level == 1 && !config.getNode("admins").getList(TypeToken.of(Integer.class)).contains(incomingMessage.getFromId()))
-                return;
-        } catch (ObjectMappingException e) {
-            e.printStackTrace();
+        if (level > 0) {
+            try {
+                List<Integer> admins = Launch.getConfig().getList(TypeToken.of(Integer.class));
+                if (admins.contains(incomingMessage.getFromId()))
+                    return;
+            } catch (ObjectMappingException e) {
+                log.error("Error while get admins list", e);
+            }
         }
 
         // TODO: if user not contains in users repo then create.

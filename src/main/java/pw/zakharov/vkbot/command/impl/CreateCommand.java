@@ -8,6 +8,7 @@ import pw.zakharov.vkbot.Launch;
 import pw.zakharov.vkbot.command.AbstractCommand;
 import pw.zakharov.vkbot.command.context.CommandContext;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -31,7 +32,7 @@ public final class CreateCommand extends AbstractCommand {
         if (commandContext.args().size() < MIN_WORDS) {
             new Message()
                     .peerId(commandContext.getSource().getPeerId())
-                    .text(("Минимальный размер истории {min_words}. " + '\n'
+                    .text(("Минимальный размер истории {min_words} слов." + '\n'
                             + "Размер твоей истории: {now_words} ")
                             .replace("{min_words}", String.valueOf(MIN_WORDS))
                             .replace("{now_words}", String.valueOf(commandContext.args().size()))
@@ -40,15 +41,17 @@ public final class CreateCommand extends AbstractCommand {
                     .execute();
             return;
         }
+        String history = Arrays.toString(commandContext.args().toArray(new String[]{}));
+        history = history.substring(1, history.length() - 1).replace(",", "");
 
-        //new Secret(User.of(commandContext.getSource().getFromId()), commandContext.getMessage());
+        //new Secret(User.of(commandContext.getSource().getFromId()), history);
         new Message()
                 .peerId(commandContext.getSource().getPeerId())
                 .text(("История #{id} создана! " + '\n'
                         + "Текст: {text} " + '\n'
                         + '\n'
                         + "Как только появится первый лайк, тебе сразу придет оповещение.")
-                        .replace("{text}", commandContext.getMessage())
+                        .replace("{text}", history)
                         .replace("{id}", String.valueOf(secretId))
                 )
                 .keyboard(getKeyboard())
@@ -66,12 +69,12 @@ public final class CreateCommand extends AbstractCommand {
         List<Keyboard.Button> firstRow = Lists.newArrayList();
 
         firstRow.add(new Keyboard.Button(
-                new Keyboard.Button.Action(Keyboard.Button.Action.Type.TEXT, "Нравится",
+                new Keyboard.Button.Action(Keyboard.Button.Action.Type.TEXT, "Лайк",
                         null, null, null, null, null),
                 Keyboard.Button.Color.POSITIVE
         ));
         firstRow.add(new Keyboard.Button(
-                new Keyboard.Button.Action(Keyboard.Button.Action.Type.TEXT, "Не нравится",
+                new Keyboard.Button.Action(Keyboard.Button.Action.Type.TEXT, "Дизлайк",
                         null, null, null, null, null),
                 Keyboard.Button.Color.NEGATIVE
         ));
@@ -81,7 +84,7 @@ public final class CreateCommand extends AbstractCommand {
                 Keyboard.Button.Color.SECONDARY
         ));
         firstRow.add(new Keyboard.Button(
-                new Keyboard.Button.Action(Keyboard.Button.Action.Type.TEXT, "Настройки",
+                new Keyboard.Button.Action(Keyboard.Button.Action.Type.TEXT, "\uD83D\uDCA4",
                         null, null, null, null, null),
                 Keyboard.Button.Color.SECONDARY
         ));
