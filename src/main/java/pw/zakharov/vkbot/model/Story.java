@@ -32,10 +32,10 @@ public class Story {
     private String text;
 
     @Column(name = "likes")
-    private int likes;
+    private Integer likes;
 
     @Column(name = "dislikes")
-    private int dislikes;
+    private Integer dislikes;
 
     public void like() {
         ++likes;

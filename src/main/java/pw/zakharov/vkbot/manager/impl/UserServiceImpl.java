@@ -9,6 +9,7 @@ import pw.zakharov.vkbot.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Created by: Alexey Zakharov <alexey@zakharov.pw>
@@ -25,20 +26,33 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Long createUser(@NotNull String name, @NotNull List<Story> stories) {
-        return userRepository.save(new User(null, name, stories)).getId();
+    public User createUser(@NotNull String name, @NotNull Integer vkId, @NotNull List<Story> stories) {
+        User user = new User(null, name, vkId, stories);
+        userRepository.save(user);
+
+        return user;
     }
 
     @Override
-    public User getUser(@NotNull Long id) {
-        Optional<User> user = userRepository.findById(id);
-        return user.orElseThrow(() -> new NullPointerException("Can't find user with this id"));
+    public Optional<User> getUser(@NotNull Long id) {
+        return userRepository.findById(id);
+    }
+
+    @Override
+    public Optional<User> getUserByVkId(@NotNull Integer vkId) {
+        return Optional.empty();
     }
 
     @Override
     public void updateUser(@NotNull User user) {
         userRepository.deleteById(user.getId());
         userRepository.save(user);
+    }
+
+    // TODO
+    @Override
+    public boolean containsUserByVkId(Integer vkId) {
+        return false;
     }
 
 }

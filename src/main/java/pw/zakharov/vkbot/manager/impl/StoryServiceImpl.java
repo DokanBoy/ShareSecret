@@ -24,14 +24,16 @@ public class StoryServiceImpl implements StoryService {
     }
 
     @Override
-    public Long createStory(@NotNull User owner, @NotNull String text) {
-        return storyRepository.save(new Story(null, owner, text, 0, 0)).getId();
+    public Story createStory(@NotNull User owner, @NotNull String text) {
+        Story story = new Story(null, owner, text, 0, 0);
+        storyRepository.save(story);
+
+        return story;
     }
 
     @Override
-    public Story getStory(@NotNull Long id) {
-        Optional<Story> story = storyRepository.findById(id);
-        return story.orElseThrow(() -> new NullPointerException("Can't find story with this id"));
+    public Optional<Story> getStory(@NotNull Long id) {
+        return storyRepository.findById(id);
     }
 
 }

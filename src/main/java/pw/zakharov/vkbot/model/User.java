@@ -28,6 +28,9 @@ public class User {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "vk_id")
+    private Integer vkId;
+
     @OneToMany(mappedBy = "stories", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Story> stories;
 

@@ -2,6 +2,7 @@ package pw.zakharov.vkbot.command.context;
 
 import com.google.common.collect.ImmutableList;
 import com.petersamokhin.vksdk.core.model.event.IncomingMessage;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by: Alexey Zakharov <alexey@zakharov.pw>
