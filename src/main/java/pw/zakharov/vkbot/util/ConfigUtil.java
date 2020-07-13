@@ -11,7 +11,7 @@ import java.io.OutputStream;
 
 /**
  * @author Alexey Zakharov
- * @date 06.06.2020
+ * @since 06.06.2020
  */
 public final class ConfigUtil {
 

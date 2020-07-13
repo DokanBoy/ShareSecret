@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * @author Alexey Zakharov
- * @date 30.04.2020
+ * @since 30.04.2020
  */
 public final class CreateCommand extends AbstractCommand {
 

@@ -7,7 +7,7 @@ import pw.zakharov.vkbot.command.context.CommandContext;
 
 /**
  * @author Alexey Zakharov
- * @date 06.06.2020
+ * @since 06.06.2020
  */
 public final class SettingsCommand extends AbstractCommand {
 

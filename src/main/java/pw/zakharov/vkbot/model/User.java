@@ -1,4 +1,4 @@
-package pw.zakharov.vkbot.persistance;
+package pw.zakharov.vkbot.model;
 
 import com.google.common.collect.Lists;
 
@@ -7,9 +7,8 @@ import java.util.List;
 
 /**
  * @author Alexey Zakharov
- * @date 03.06.2020
+ * @since 03.06.2020
  */
-
 @Entity
 @Table(name = "users")
 public class User {

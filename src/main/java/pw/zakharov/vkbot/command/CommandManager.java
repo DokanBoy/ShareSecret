@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * @author Alexey Zakharov
- * @date 26.04.2020
+ * @since 26.04.2020
  */
 public final class CommandManager {
 

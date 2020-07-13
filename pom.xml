@@ -6,7 +6,7 @@
 
     <groupId>pw.zakharov</groupId>
     <artifactId>ShareYourStory</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <developers>
         <developer>
@@ -115,7 +115,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>5.4.17.Final</version>
+            <version>5.4.18.Final</version>
         </dependency>
 
         <!-- JetBrains Annotations -->

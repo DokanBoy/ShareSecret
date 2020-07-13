@@ -5,12 +5,12 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pw.zakharov.vkbot.persistance.Story;
-import pw.zakharov.vkbot.persistance.User;
+import pw.zakharov.vkbot.model.Story;
+import pw.zakharov.vkbot.model.User;
 
 /**
  * @author Alexey Zakharov
- * @date 03.06.2020
+ * @since 03.06.2020
  */
 public final class HibernateSessionFactoryUtil {
 

@@ -10,7 +10,7 @@ import java.util.function.Consumer;
 
 /**
  * @author Alexey Zakharov
- * @date 30.04.2020
+ * @since 30.04.2020
  */
 public interface Command {
 

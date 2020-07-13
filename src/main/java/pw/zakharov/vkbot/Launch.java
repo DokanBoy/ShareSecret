@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 
 /**
  * @author Alexey Zakharov
- * @date 31.05.2020
+ * @since 31.05.2020
  */
 public final class Launch {
 

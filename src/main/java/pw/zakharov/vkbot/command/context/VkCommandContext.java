@@ -5,7 +5,7 @@ import com.petersamokhin.vksdk.core.model.event.IncomingMessage;
 
 /**
  * @author Alexey Zakharov
- * @date 31.05.2020
+ * @since 31.05.2020
  */
 public final class VkCommandContext implements CommandContext {
 

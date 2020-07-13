@@ -13,7 +13,7 @@ import pw.zakharov.vkbot.command.CommandManager;
 
 /**
  * @author Alexey Zakharov
- * @date 31.05.2020
+ * @since 31.05.2020
  */
 public final class VkBot {
 

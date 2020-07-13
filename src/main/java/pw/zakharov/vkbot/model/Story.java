@@ -1,12 +1,11 @@
-package pw.zakharov.vkbot.persistance;
+package pw.zakharov.vkbot.model;
 
 import javax.persistence.*;
 
 /**
  * @author Alexey Zakharov
- * @date 31.05.2020
+ * @since 31.05.2020
  */
-
 @Entity
 @Table(name = "secrets")
 public class Story {
@@ -56,11 +55,11 @@ public class Story {
         return owner;
     }
 
-    public void inc() {
+    public void like() {
         ++likes;
     }
 
-    public void dec() {
+    public void dislike() {
         ++dislikes;
     }
 

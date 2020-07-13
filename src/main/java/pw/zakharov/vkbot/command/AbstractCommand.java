@@ -19,7 +19,7 @@ import java.util.function.Consumer;
 
 /**
  * @author Alexey Zakharov
- * @date 31.05.2020
+ * @since 31.05.2020
  */
 public abstract class AbstractCommand implements Command {
 
