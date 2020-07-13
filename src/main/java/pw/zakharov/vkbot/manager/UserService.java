@@ -26,4 +26,9 @@ public interface UserService {
      */
     User getUser(@NotNull Long id);
 
+    /**
+     * @param user User to be updated
+     */
+    void updateUser(@NotNull User user);
+
 }

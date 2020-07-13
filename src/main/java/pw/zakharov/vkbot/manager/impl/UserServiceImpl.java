@@ -35,4 +35,10 @@ public class UserServiceImpl implements UserService {
         return user.orElseThrow(() -> new NullPointerException("Can't find user with this id"));
     }
 
+    @Override
+    public void updateUser(@NotNull User user) {
+        userRepository.deleteById(user.getId());
+        userRepository.save(user);
+    }
+
 }
