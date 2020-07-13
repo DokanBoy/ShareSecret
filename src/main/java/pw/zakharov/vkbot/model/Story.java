@@ -1,59 +1,41 @@
 package pw.zakharov.vkbot.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 /**
- * @author Alexey Zakharov
- * @since 31.05.2020
+ * Created by: Alexey Zakharov <alexey@zakharov.pw>
+ * Date: 14.07.2020 1:34
  */
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
-@Table(name = "secrets")
+@Table(name = "stories")
 public class Story {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-
-    @Column(name = "text")
-    private final String text;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private final User owner;
+    private User owner;
+
+    @Column(name = "text")
+    private String text;
 
     @Column(name = "likes")
     private int likes;
 
     @Column(name = "dislikes")
     private int dislikes;
-
-    public Story(User owner, String text) {
-        this.owner = owner;
-        this.text = text;
-
-        this.likes = 0;
-        this.dislikes = 0;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public int getLikes() {
-        return likes;
-    }
-
-    public int getDislikes() {
-        return dislikes;
-    }
-
-    public User getOwner() {
-        return owner;
-    }
 
     public void like() {
         ++likes;

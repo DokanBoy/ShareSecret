@@ -1,6 +1,7 @@
 package pw.zakharov.vkbot.util;
 
 import com.google.common.io.Resources;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,9 +11,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * @author Alexey Zakharov
- * @since 06.06.2020
+ * Created by: Alexey Zakharov <alexey@zakharov.pw>
+ * Date: 14.07.2020 1:34
  */
+
 public final class ConfigUtil {
 
     private static final Logger log = LoggerFactory.getLogger(ConfigUtil.class);
@@ -23,7 +25,8 @@ public final class ConfigUtil {
         saveResource("config.conf", outputStream);
     }
 
-    public static void saveResource(final String fileName, final OutputStream outputStream) throws IOException {
+    public static void saveResource(@NotNull final String fileName,
+                                    @NotNull final OutputStream outputStream) throws IOException {
         Resources.copy(Resources.getResource(fileName), outputStream);
     }
 

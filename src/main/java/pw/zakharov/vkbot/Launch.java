@@ -11,9 +11,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 /**
- * @author Alexey Zakharov
- * @since 31.05.2020
+ * Created by: Alexey Zakharov <alexey@zakharov.pw>
+ * Date: 14.07.2020 1:34
  */
+
 public final class Launch {
 
     private static final Logger log = LoggerFactory.getLogger(Launch.class);
@@ -46,7 +47,7 @@ public final class Launch {
         }
 
         log.info("Staring launcher for Vk Bot.");
-        new VkBot(
+        VkBot.start(
                 config.getNode("credentials").getNode("groupId").getInt(),
                 config.getNode("credentials").getNode("accessToken").getString()
         );

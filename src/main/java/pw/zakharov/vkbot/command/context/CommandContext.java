@@ -4,9 +4,10 @@ import com.google.common.collect.ImmutableList;
 import com.petersamokhin.vksdk.core.model.event.IncomingMessage;
 
 /**
- * @author Alexey Zakharov
- * @since 31.05.2020
+ * Created by: Alexey Zakharov <alexey@zakharov.pw>
+ * Date: 14.07.2020 2:24
  */
+
 public interface CommandContext {
 
     ImmutableList<String> args();

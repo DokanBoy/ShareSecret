@@ -1,30 +1,29 @@
 package pw.zakharov.vkbot;
 
-import com.petersamokhin.vksdk.core.callback.EventCallback;
 import com.petersamokhin.vksdk.core.client.VkApiClient;
 import com.petersamokhin.vksdk.core.http.HttpClient;
 import com.petersamokhin.vksdk.core.model.VkSettings;
-import com.petersamokhin.vksdk.core.model.event.MessageNew;
 import com.petersamokhin.vksdk.http.VkOkHttpClient;
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pw.zakharov.vkbot.command.CommandManager;
 
 /**
- * @author Alexey Zakharov
- * @since 31.05.2020
+ * Created by: Alexey Zakharov <alexey@zakharov.pw>
+ * Date: 14.07.2020 1:34
  */
+
 public final class VkBot {
 
     private static final Logger log = LoggerFactory.getLogger(VkBot.class);
 
     private static VkApiClient client;
 
-    public VkBot(int groupId, String accessToken) {
-        log.debug("Group Id: " + groupId);
-        log.debug("Access token: " + accessToken);
+    private VkBot() throws IllegalAccessException {
+        throw new UnsupportedOperationException("This class cannot be instantiated");
+    }
 
+    public static void start(int groupId, String accessToken) {
         log.info("Starting Http client.");
         HttpClient vkHttpClient = new VkOkHttpClient();
 

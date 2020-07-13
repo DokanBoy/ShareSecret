@@ -12,9 +12,10 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author Alexey Zakharov
- * @since 30.04.2020
+ * Created by: Alexey Zakharov <alexey@zakharov.pw>
+ * Date: 14.07.2020 2:24
  */
+
 public final class CreateCommand extends AbstractCommand {
 
     private static final int MIN_WORDS = Launch.getConfig().getNode("settings").getNode("story_min_words").getInt();

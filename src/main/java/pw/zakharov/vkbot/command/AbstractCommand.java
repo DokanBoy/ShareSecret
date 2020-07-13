@@ -18,9 +18,10 @@ import java.util.List;
 import java.util.function.Consumer;
 
 /**
- * @author Alexey Zakharov
- * @since 31.05.2020
+ * Created by: Alexey Zakharov <alexey@zakharov.pw>
+ * Date: 14.07.2020 2:24
  */
+
 public abstract class AbstractCommand implements Command {
 
     protected static final VkApiClient client = VkBot.getClient();

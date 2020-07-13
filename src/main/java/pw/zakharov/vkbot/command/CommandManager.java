@@ -3,6 +3,7 @@ package pw.zakharov.vkbot.command;
 import com.petersamokhin.vksdk.core.client.VkApiClient;
 import com.petersamokhin.vksdk.core.model.event.IncomingMessage;
 import ninja.leaping.configurate.objectmapping.ObjectMappingException;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pw.zakharov.vkbot.command.impl.CreateCommand;
@@ -12,9 +13,10 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author Alexey Zakharov
- * @since 26.04.2020
+ * Created by: Alexey Zakharov <alexey@zakharov.pw>
+ * Date: 14.07.2020 2:24
  */
+
 public final class CommandManager {
 
     private static final Logger log = LoggerFactory.getLogger(CommandManager.class);
@@ -32,23 +34,19 @@ public final class CommandManager {
 
     private void handle() {
         client.onMessage(event -> {
-            log.debug("Handled message=" + event.getMessage()
-                    + ", from id=" + event.getMessage().getFromId()
-            );
-
             COMMAND_REGISTRY.forEach(command -> {
                 IncomingMessage message = event.getMessage();
                 String name = getCommand(message.getText());
                 String[] args = getArgs(message.getText());
 
-                log.debug("Handled command name=" + name
+                log.debug("Handled command, name=" + name
                         + ", from id=" + message.getFromId()
                         + ", message=" + message.getText()
                         + ", where args=" + Arrays.toString(args)
                 );
 
                 if (command.getName().equals(name) || command.getAliases().contains(name)) {
-                    try { // TODO: избавиться от try-catch
+                    try {
                         command.call(message, args);
                     } catch (ObjectMappingException e) {
                         e.printStackTrace();
@@ -58,11 +56,11 @@ public final class CommandManager {
         });
     }
 
-    private String getCommand(String sourceText) {
+    private String getCommand(@NotNull String sourceText) {
         return sourceText.split(" ")[0];
     }
 
-    private String[] getArgs(String sourceText) {
+    private String[] getArgs(@NotNull String sourceText) {
         String[] source = sourceText.split(" ");
 
         int newLength = source.length - 1;

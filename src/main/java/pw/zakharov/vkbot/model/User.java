@@ -1,54 +1,34 @@
 package pw.zakharov.vkbot.model;
 
-import com.google.common.collect.Lists;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 
 /**
- * @author Alexey Zakharov
- * @since 03.06.2020
+ * Created by: Alexey Zakharov <alexey@zakharov.pw>
+ * Date: 14.07.2020 1:34
  */
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private final int id;
+    private Long id;
 
     @Column(name = "name")
-    private final String name;
+    private String name;
 
-    @OneToMany(mappedBy = "secrets", cascade = CascadeType.ALL, orphanRemoval = true)
-    private final List<Story> stories;
-
-    public User(int id, String name, List<Story> stories) {
-        this.id = id;
-        this.name = name;
-        this.stories = stories;
-    }
-
-    public User(int id, String name) {
-        this.id = id;
-        this.name = name;
-        this.stories = Lists.newArrayList();
-    }
-
-    public static User of(int id) {
-        return new User(id, null, null);
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public List<Story> getStories() {
-        return stories;
-    }
+    @OneToMany(mappedBy = "stories", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Story> stories;
 
 }

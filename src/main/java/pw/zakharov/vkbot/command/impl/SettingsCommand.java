@@ -6,9 +6,10 @@ import pw.zakharov.vkbot.command.AbstractCommand;
 import pw.zakharov.vkbot.command.context.CommandContext;
 
 /**
- * @author Alexey Zakharov
- * @since 06.06.2020
+ * Created by: Alexey Zakharov <alexey@zakharov.pw>
+ * Date: 14.07.2020 2:24
  */
+
 public final class SettingsCommand extends AbstractCommand {
 
     public SettingsCommand() {
