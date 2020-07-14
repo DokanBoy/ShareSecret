@@ -8,7 +8,7 @@ import com.petersamokhin.vksdk.core.model.event.IncomingMessage;
  * Date: 14.07.2020 2:24
  */
 
-public final class VkCommandContext implements CommandContext {
+public class VkCommandContext implements CommandContext {
 
     private final ImmutableList<String> args;
     private final IncomingMessage source;

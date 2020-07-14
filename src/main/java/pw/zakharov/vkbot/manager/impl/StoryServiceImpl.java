@@ -36,4 +36,10 @@ public class StoryServiceImpl implements StoryService {
         return storyRepository.findById(id);
     }
 
+    @Override
+    public void updateStory(@NotNull Story story) {
+        storyRepository.deleteById(story.getId());
+        storyRepository.save(story);
+    }
+
 }

@@ -26,4 +26,8 @@ public interface StoryService {
      */
     Optional<Story> getStory(@NotNull Long id);
 
+    /**
+     * @param story Story to be updated
+     */
+    void updateStory(@NotNull Story story);
 }

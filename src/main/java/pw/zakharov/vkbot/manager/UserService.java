@@ -15,10 +15,10 @@ import java.util.Optional;
 public interface UserService {
 
     /**
-     * @param name user name (name + last name maybe)
-     * @param vkId  user vk id
+     * @param name    user name (name + last name maybe)
+     * @param vkId    user vk id
      * @param stories user stories, if user does`not have stories can be passed on List#of()
-     * @return user
+     * @return the user that you created
      */
     User createUser(@NotNull String name, @NotNull Integer vkId, @NotNull List<Story> stories);
 
@@ -29,16 +29,20 @@ public interface UserService {
     Optional<User> getUser(@NotNull Long id);
 
     /**
+     * @param user User to be updated
+     */
+    void updateUser(@NotNull User user);
+
+    /**
      * @param vkId User id
      * @return User by vk id
      */
     Optional<User> getUserByVkId(@NotNull Integer vkId);
 
     /**
-     * @param user User to be updated
+     * @param vkId Vk user Id
+     * @return true if the user with this id exists in the repository
      */
-    void updateUser(@NotNull User user);
-
     boolean containsUserByVkId(Integer vkId);
 
 }
