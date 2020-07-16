@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,13 +34,5 @@ public class User {
 
     @OneToMany(mappedBy = "stories", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Story> stories;
-
-    public void addStory(Story story) {
-        stories.add(story);
-    }
-
-    public void removeStory(Long id) {
-        stories.removeIf(story -> story.getId().equals(id));
-    }
 
 }

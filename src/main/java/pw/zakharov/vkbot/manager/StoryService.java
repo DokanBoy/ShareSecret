@@ -1,9 +1,11 @@
 package pw.zakharov.vkbot.manager;
 
 import org.jetbrains.annotations.NotNull;
+import pw.zakharov.vkbot.model.Like;
 import pw.zakharov.vkbot.model.Story;
 import pw.zakharov.vkbot.model.User;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -18,7 +20,7 @@ public interface StoryService {
      * @param text  Story text
      * @return story id
      */
-    Story createStory(@NotNull User owner, @NotNull String text);
+    @NotNull Story createStory(@NotNull User owner, @NotNull String text);
 
     /**
      * @param id Story id
@@ -30,4 +32,10 @@ public interface StoryService {
      * @param story Story to be updated
      */
     void updateStory(@NotNull Story story);
+
+    /**
+     * @return list of users who liked this story
+     */
+    @NotNull List<Like> like(@NotNull Story story, @NotNull Like like);
+
 }

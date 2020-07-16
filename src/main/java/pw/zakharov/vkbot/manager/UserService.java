@@ -20,7 +20,7 @@ public interface UserService {
      * @param stories user stories, if user does`not have stories can be passed on List#of()
      * @return the user that you created
      */
-    User createUser(@NotNull String name, @NotNull Integer vkId, @NotNull List<Story> stories);
+    @NotNull User createUser(@NotNull String name, @NotNull Integer vkId, @NotNull List<Story> stories);
 
     /**
      * @param id User id
@@ -29,20 +29,24 @@ public interface UserService {
     Optional<User> getUser(@NotNull Long id);
 
     /**
-     * @param user User to be updated
+     * @param id User by id to be updated
      */
-    void updateUser(@NotNull User user);
+    void updateUser(@NotNull User id);
 
     /**
      * @param vkId User id
      * @return User by vk id
      */
-    Optional<User> getUserByVkId(@NotNull Integer vkId);
+    Optional<User> findUserByVkId(@NotNull Integer vkId);
 
     /**
      * @param vkId Vk user Id
      * @return true if the user with this id exists in the repository
      */
-    boolean containsUserByVkId(Integer vkId);
+    boolean containsUserByVkId(@NotNull Integer vkId);
+
+    void addStory(@NotNull Long userId, Story story);
+
+    void removeStory(@NotNull Long userId, Long storyId);
 
 }

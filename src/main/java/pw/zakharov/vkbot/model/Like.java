@@ -7,11 +7,10 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Created by: Alexey Zakharov <alexey@zakharov.pw>
- * Date: 14.07.2020 1:34
+ * Date: 14.07.2020 15:32
  */
 
 @AllArgsConstructor
@@ -19,22 +18,27 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "stories")
-public class Story implements Serializable {
+@Table(name = "likes")
+public class Like implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User owner;
+    @Column(name = "user_id")
+    private Long userId;
 
-    @Column(name = "text")
-    private String text;
+    @Column(name = "story_id")
+    private Long storyId;
 
-    @Column(name = "likes")
-    @OneToMany(mappedBy = "stories", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Like> likes;
+    @Column(name = "story_id")
+    private Type type;
+
+    public enum Type {
+        LIKE,
+        DISLIKE
+    }
 
 }
+
+

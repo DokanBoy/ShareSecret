@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(@NotNull String name, @NotNull Integer vkId, @NotNull List<Story> stories) {
+    public @NotNull User createUser(@NotNull String name, @NotNull Integer vkId, @NotNull List<Story> stories) {
         User user = new User(null, name, vkId, stories);
         userRepository.save(user);
 
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> getUserByVkId(@NotNull Integer vkId) {
+    public Optional<User> findUserByVkId(@NotNull Integer vkId) {
         return Optional.empty();
     }
 
@@ -49,10 +49,26 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
-    // TODO
     @Override
-    public boolean containsUserByVkId(Integer vkId) {
+    public boolean containsUserByVkId(@NotNull Integer vkId) {
+        // TODO
         return false;
+    }
+
+    @Override
+    public void addStory(@NotNull Long userId, @NotNull Story story) {
+        User user = getUser(userId).orElseThrow();
+        user.getStories().add(story);
+
+        updateUser(user);
+    }
+
+    @Override
+    public void removeStory(@NotNull Long userId, @NotNull Long storyId) {
+        User user = getUser(userId).orElseThrow();
+        user.getStories().removeIf(story -> story.getId().equals(storyId));
+
+        updateUser(user);
     }
 
 }
