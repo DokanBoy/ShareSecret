@@ -12,7 +12,6 @@ import java.io.Serializable;
  * Created by: Alexey Zakharov <alexey@zakharov.pw>
  * Date: 14.07.2020 15:32
  */
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

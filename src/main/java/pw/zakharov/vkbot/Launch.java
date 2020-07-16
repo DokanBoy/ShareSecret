@@ -1,10 +1,11 @@
 package pw.zakharov.vkbot;
 
+import lombok.AllArgsConstructor;
 import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pw.zakharov.vkbot.util.ConfigUtil;
+import pw.zakharov.vkbot.utils.ConfigUtil;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,7 +15,6 @@ import java.nio.file.Paths;
  * Created by: Alexey Zakharov <alexey@zakharov.pw>
  * Date: 14.07.2020 1:34
  */
-
 public final class Launch {
 
     private static final Logger log = LoggerFactory.getLogger(Launch.class);

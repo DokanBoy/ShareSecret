@@ -11,7 +11,6 @@ import java.util.Optional;
  * Created by: Alexey Zakharov <alexey@zakharov.pw>
  * Date: 14.07.2020 2:23
  */
-
 public interface UserService {
 
     /**
@@ -21,6 +20,8 @@ public interface UserService {
      * @return the user that you created
      */
     @NotNull User createUser(@NotNull String name, @NotNull Integer vkId, @NotNull List<Story> stories);
+
+    @NotNull User getOrCreate(@NotNull String name, @NotNull Integer vkId, @NotNull List<Story> stories);
 
     /**
      * @param id User id

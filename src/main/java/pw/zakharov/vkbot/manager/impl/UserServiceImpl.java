@@ -9,13 +9,11 @@ import pw.zakharov.vkbot.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 /**
  * Created by: Alexey Zakharov <alexey@zakharov.pw>
  * Date: 14.07.2020 2:25
  */
-
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -31,6 +29,16 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
 
         return user;
+    }
+
+    @Override
+    public @NotNull User getOrCreate(@NotNull String name,
+                                     @NotNull Integer vkId,
+                                     @NotNull List<Story> stories) {
+        if (findUserByVkId(vkId).isEmpty())
+            return createUser(name, vkId, stories);
+
+        return findUserByVkId(vkId).get();
     }
 
     @Override

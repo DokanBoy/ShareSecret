@@ -19,8 +19,7 @@ import java.util.List;
  * Created by: Alexey Zakharov <alexey@zakharov.pw>
  * Date: 14.07.2020 2:24
  */
-
-public final class CreateCommand extends AbstractCommand {
+public final class CreateStoryCommand extends AbstractCommand {
 
     private static final int MIN_WORDS = Launch.getConfig().getNode("settings").getNode("story_min_words").getInt();
     private static final int MAX_WORDS = Launch.getConfig().getNode("settings").getNode("story_max_words").getInt();
@@ -28,7 +27,7 @@ public final class CreateCommand extends AbstractCommand {
     private final UserService userService;
     private final StoryService storyService;
 
-    public CreateCommand(UserService userService, StoryService storyService) {
+    public CreateStoryCommand(UserService userService, StoryService storyService) {
         super("добавить");
 
         this.userService = userService;
@@ -39,13 +38,11 @@ public final class CreateCommand extends AbstractCommand {
 
     @Override
     protected void execute(@NotNull CommandContext commandContext) {
-        User user;
-        if (userService.containsUserByVkId(commandContext.getSource().getFromId())) {
-            user = userService.createUser("Empty", commandContext.getSource().getFromId(), List.of());
-        } else {
-            user = null;
-            // TODO: user = userService.getUserByVkId(Long);
-        }
+        User user = userService.getOrCreate(
+            commandContext.getSender().getName(),
+            commandContext.getSender().getVkId(),
+            List.of()
+        );
 
         if (commandContext.args().size() < MIN_WORDS) {
             new Message()

@@ -15,7 +15,6 @@ import java.util.Optional;
  * Created by: Alexey Zakharov <alexey@zakharov.pw>
  * Date: 14.07.2020 2:25
  */
-
 @Service
 public class StoryServiceImpl implements StoryService {
 

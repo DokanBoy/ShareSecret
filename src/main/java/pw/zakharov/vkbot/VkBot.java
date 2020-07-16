@@ -12,7 +12,6 @@ import pw.zakharov.vkbot.command.CommandManager;
  * Created by: Alexey Zakharov <alexey@zakharov.pw>
  * Date: 14.07.2020 1:34
  */
-
 public final class VkBot {
 
     private static final Logger log = LoggerFactory.getLogger(VkBot.class);

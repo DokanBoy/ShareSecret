@@ -6,7 +6,10 @@ import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pw.zakharov.vkbot.command.impl.CreateCommand;
+import org.springframework.stereotype.Service;
+import pw.zakharov.vkbot.command.impl.CreateStoryCommand;
+import pw.zakharov.vkbot.manager.StoryService;
+import pw.zakharov.vkbot.manager.UserService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,18 +19,21 @@ import java.util.List;
  * Created by: Alexey Zakharov <alexey@zakharov.pw>
  * Date: 14.07.2020 2:24
  */
-
 public final class CommandManager {
 
     private static final Logger log = LoggerFactory.getLogger(CommandManager.class);
+    private static final List<Command> COMMAND_REGISTRY = new ArrayList<>();
 
     private final VkApiClient client;
-    private final List<Command> COMMAND_REGISTRY = new ArrayList<>();
+    private final UserService userService;
+    private final StoryService storyService;
 
-    public CommandManager(VkApiClient client) {
+    public CommandManager(VkApiClient client, UserService userService, StoryService storyService) {
         this.client = client;
+        this.userService = userService;
+        this.storyService = storyService;
 
-        COMMAND_REGISTRY.add(new CreateCommand());
+        COMMAND_REGISTRY.add(new CreateStoryCommand(userService, storyService));
 
         handle();
     }

@@ -21,7 +21,6 @@ import java.util.function.Consumer;
  * Created by: Alexey Zakharov <alexey@zakharov.pw>
  * Date: 14.07.2020 2:24
  */
-
 public abstract class AbstractCommand implements Command {
 
     protected static final VkApiClient client = VkBot.getClient();
